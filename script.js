@@ -1,5 +1,5 @@
 function getWeather() {
-    const apiKey = 'YOUR-API-KEY';
+    const apiKey = '2000eb64c59d031780bb9eef7d0f8b09';
     const city = document.getElementById('city').value;
 
     if (!city) {
@@ -51,14 +51,8 @@ function displayWeather(data) {
         const iconCode = data.weather[0].icon;
         const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
 
-        const temperatureHTML = `
-            <p>${temperature}°C</p>
-        `;
-
-        const weatherHtml = `
-            <p>${cityName}</p>
-            <p>${description}</p>
-        `;
+        const temperatureHTML = `<p>${temperature}°C</p>`;
+        const weatherHtml = `<p>${cityName}</p><p>${description}</p>`;
 
         tempDivInfo.innerHTML = temperatureHTML;
         weatherInfoDiv.innerHTML = weatherHtml;
@@ -71,13 +65,12 @@ function displayWeather(data) {
 
 function displayHourlyForecast(hourlyData) {
     const hourlyForecastDiv = document.getElementById('hourly-forecast');
-
-    const next24Hours = hourlyData.slice(0, 8); // Display the next 24 hours (3-hour intervals)
+    const next24Hours = hourlyData.slice(0, 8); // 3-hour intervals x 8 = 24 hrs
 
     next24Hours.forEach(item => {
-        const dateTime = new Date(item.dt * 1000); // Convert timestamp to milliseconds
+        const dateTime = new Date(item.dt * 1000);
         const hour = dateTime.getHours();
-        const temperature = Math.round(item.main.temp - 273.15); // Convert to Celsius
+        const temperature = Math.round(item.main.temp - 273.15);
         const iconCode = item.weather[0].icon;
         const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
 
@@ -95,5 +88,5 @@ function displayHourlyForecast(hourlyData) {
 
 function showImage() {
     const weatherIcon = document.getElementById('weather-icon');
-    weatherIcon.style.display = 'block'; // Make the image visible once it's loaded
+    weatherIcon.style.display = 'block';
 }
